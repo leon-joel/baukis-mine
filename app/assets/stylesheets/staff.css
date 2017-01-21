@@ -12,6 +12,7 @@
  *
  * アセットパイプラインの対象を以下で規定している
  * require_tree <パス>: このディレクトリ以下の全ファイルを処理対象とする
+ *= require_tree ./shared
  *= require_tree ./staff
  * require_self: このファイルに記述されているスタイルを処理対象とする
  * ※Baukisではこのファイルにスタイルを記述しないのでrequire_selfはコメント化

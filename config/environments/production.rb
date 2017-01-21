@@ -2,7 +2,12 @@ Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
-  config.cache_classes = true
+  # config.cache_classes = true
+  config.cache_classes = false
+  # TODO: エラーページをテストするため、ソースコードの変更を即座に反映して貰いたいので一時的にfalseにしている
+  #       ★これをfalseにすることで、何に対する変更が即座に反映されるのかよく分かっていない
+  #       - View（errors/xxx.html.haml）への変更は即座に反映された
+  #       - controllers/application_controller.rb への変更は反映されなかった
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both threaded web servers
