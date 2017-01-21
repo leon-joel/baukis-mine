@@ -34,6 +34,9 @@ module Baukis
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :ja
 
+    # デフォルトのテンプレートエンジン :haml or :slim
+    config.generators.template_engine = :haml
+
     config.generators do |g|
       g.helper false
       g.assets false
