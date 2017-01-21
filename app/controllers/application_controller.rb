@@ -10,10 +10,8 @@ class ApplicationController < ActionController::Base
   class Forbidden < ActionController::ActionControllerError; end
   class IpAddressRejected < ActionController::ActionControllerError; end
 
-  # 例外ハンドラーの登録 ※親子関係にある例外は【親】の方を先に（上に）書かないといけない。そうしないと全部親のハンドラーで処理されてしまう
-  rescue_from Exception, with: :rescue500
-  rescue_from Forbidden, with: :rescue403
-  rescue_from IpAddressRejected, with: :rescue403
+  # [productionのみ]ユーザーフレンドリーなエラー画面を表示する
+  include ErrorHandlers if Rails.env.production?
 
   private
   def set_layout
@@ -25,15 +23,4 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # 403: Forbidden
-  def rescue403(e)
-    @exception = e
-    render "errors/forbidden", status: 403
-  end
-
-  # 500: Internal Server Error
-  def rescue500(e)
-    @exception = e
-    render "errors/internal_server_error", status: 500
-  end
 end

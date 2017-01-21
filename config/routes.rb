@@ -15,6 +15,14 @@ Rails.application.routes.draw do
     root 'top#index'
   end
 
+  # rootを明示しないとデフォルトのindex.htmlが表示されてしまう
+  root 'errors#routing_error'
+
+  # どれにもmatchしなかった場合、routing_errorsに流し込む
+  # ※ActionController::RoutingErrorはルーティング処理で発生するエラーなのでrescue_fromでは捕捉できない。
+  #   よってcontroller内で明示的にActionController::RoutingErrorをraiseし、rescue_fromで捕捉する
+  get '*anything' => 'errors#routing_error'
+
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
 
