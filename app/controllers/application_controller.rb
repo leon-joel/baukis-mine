@@ -6,8 +6,14 @@ class ApplicationController < ActionController::Base
   # layoutを動的に切り替える仕組み
   layout :set_layout
 
-  # 例外ハンドラーの登録
+  # controllerエラークラス
+  class Forbidden < ActionController::ActionControllerError; end
+  class IpAddressRejected < ActionController::ActionControllerError; end
+
+  # 例外ハンドラーの登録 ※親子関係にある例外は【親】の方を先に（上に）書かないといけない。そうしないと全部親のハンドラーで処理されてしまう
   rescue_from Exception, with: :rescue500
+  rescue_from Forbidden, with: :rescue403
+  rescue_from IpAddressRejected, with: :rescue403
 
   private
   def set_layout
@@ -19,7 +25,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # 500エラーを返す
+  # 403: Forbidden
+  def rescue403(e)
+    @exception = e
+    render "errors/forbidden", status: 403
+  end
+
+  # 500: Internal Server Error
   def rescue500(e)
     @exception = e
     render "errors/internal_server_error", status: 500
