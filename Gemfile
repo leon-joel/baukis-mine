@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.1.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.16'
+gem 'rails', '~> 4.1.16'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -47,9 +47,15 @@ gem 'rails-i18n', '~> 4.0.1'
 gem 'haml-rails'
 
 group :test do
-  gem 'rspec-rails', '~> 3.0.0.bata2'
+  # vagrant@vagrant-ubuntu-trusty-64:/vagrant$ RAILS_ENV=test rake db:create
+  # rake aborted!
+  # NoMethodError: undefined method `last_comment' for #<Rake::Application:0x007fac817cad00>
+  # /home/vagrant/.gem/ruby/2.1.2/gems/rspec-core-3.0.4/lib/rspec/core/rake_task.rb:101:in `define'
+  # gem 'rspec-rails', '~> 3.0.0.bata2'
+  gem 'rspec-rails', '~> 3.5.0
+'
   gem 'spring-commands-rspec', '~> 1.0.1'   # rspecをspring経由で呼び出すために必要
   gem 'capybara', '~> 2.2.1'          # for feature spec
   gem 'factory_girl_rails', '~> 4.4.1'
-  gem 'database_cleaner', '~> 1.2.0'  # テスト実行後にDBをクリア
+  # gem 'database_cleaner', '~> 1.2.0'  # テスト実行後にDBをクリア
 end
