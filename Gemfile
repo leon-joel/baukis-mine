@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-ruby '2.1.2'
+ruby '2.1.9'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.1.16'
@@ -59,3 +59,6 @@ group :test do
   gem 'factory_girl_rails', '~> 4.4.1'
   # gem 'database_cleaner', '~> 1.2.0'  # テスト実行後にDBをクリア
 end
+
+# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

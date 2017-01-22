@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   namespace :staff do
     # Staff::TopController#index
     root 'top#index'
+
+    get 'login' => 'sessions#new', as: :login
+    post 'session' => 'sessions#create', as: :session
+    delete 'session' => 'sessions#destroy'
   end
 
   namespace :admin do
@@ -16,12 +20,12 @@ Rails.application.routes.draw do
   end
 
   # rootを明示しないとデフォルトのindex.htmlが表示されてしまう
-  root 'errors#routing_error'
+  root 'errors#not_found'
 
-  # どれにもmatchしなかった場合、routing_errorsに流し込む
+  # どれにもmatchしなかった場合、not_foundに流し込む
   # ※ActionController::RoutingErrorはルーティング処理で発生するエラーなのでrescue_fromでは捕捉できない。
   #   よってcontroller内で明示的にActionController::RoutingErrorをraiseし、rescue_fromで捕捉する
-  get '*anything' => 'errors#routing_error'
+  get '*anything' => 'errors#not_found'
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'

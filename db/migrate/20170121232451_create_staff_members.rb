@@ -3,6 +3,12 @@ class CreateStaffMembers < ActiveRecord::Migration
     # 主キー id は暗黙的に生成される。
     # 明示したい場合には create_table :staff_members, primary_key: 'menber_id' do |t| のようにする
     create_table :staff_members do |t|
+      # テーブル名をカスタマイズしたい場合には以下のようにする
+      # self.table_name = 'M_SHOKUIN'
+
+      # カラム名にはaliasが付けられる ※第1引数が別名、第2引数がDBカラム名。アプリケーションからはどちらでもアクセス可能。
+      # alias_attribute :section, :BUMON
+
       t.string :email, null: false                      # メールアドレス
       t.string :email_for_index, null: false            # 索引用メールアドレス
       t.string :family_name, null: false                # 姓

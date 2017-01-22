@@ -1,0 +1,7 @@
+%header
+  %span.logo-mark BAUKIS
+
+  - if current_staff_member
+    = link_to 'ログアウト', :staff_session, method: :delete
+  - else
+    = link_to 'ログイン', :staff_login
