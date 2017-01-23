@@ -20,10 +20,15 @@ class Staff::SessionsController < Staff::Base
 
     # ユーザー認証
     if Staff::Authenticator.new(staff_member).authenticate(@form.password)
-      # 認証OK
-      session[:staff_member_id] = staff_member.id
-      flash.notice = 'ログインしました。'
-      redirect_to :staff_root
+      if staff_member.suspended?
+        flash.now.alert = 'アカウントが停止されています。'
+        render action: 'new'
+      else
+        # 認証OK
+        session[:staff_member_id] = staff_member.id
+        flash.notice = 'ログインしました。'
+        redirect_to :staff_root
+      end
     else
       # 認証失敗
       flash.now.alert = 'メールアドレスまたはパスワードが正しくありません。'
