@@ -2,21 +2,33 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  namespace :staff do
+  # path を '' にしているので、url pathが /staff/login ではなく /login になる ※controllerとルーティング名は変わらない
+  namespace :staff, path: '' do
     # Staff::TopController#index
     root 'top#index'
 
     get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+
+    # 単数リソースで書き換え
+    # post 'session' => 'sessions#create', as: :session
+    # delete 'session' => 'sessions#destroy'
+    resource 'session', only: [ :create, :destroy ]
+
+    # 単数リソースである点に注意 ※controllerは staff/accounts と複数形になる
+    resource :account, except: [ :new, :create, :destroy ]
   end
 
   namespace :admin do
     root 'top#index'
 
     get 'login' => 'sessions#new', as: :login
-    post 'session' => 'sessions#create', as: :session
-    delete 'session' => 'sessions#destroy'
+
+    # 単数リソースで書き換え
+    # post 'session' => 'sessions#create', as: :session
+    # delete 'session' => 'sessions#destroy'
+    resource 'session', only: [ :create, :destroy ]
+
+    resources :staff_members
   end
 
   namespace :customer do
