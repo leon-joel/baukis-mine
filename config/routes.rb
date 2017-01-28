@@ -2,6 +2,17 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
+
+  # 10-5 演習1
+  # namespace :admin, module: 'administration' do
+  #   get 'blog/:year/:month/:mday' => 'articles#show',
+  #       constraints: {year: /20\d\d/, month: /\d\d/, mday: /\d\d/ },
+  #       as: :article
+  # end
+  # Prefix        Verb   URI Pattern                              Controller#Action
+  # admin_article GET    /admin/blog/:year/:month/:mday(.:format) administration/articles#show {:year=>/20\d\d/, :month=>/\d\d/, :mday=>/\d\d/}
+
+
   config = Rails.application.config.baukis
 
   # ホスト名による制約 ※このホスト名でアクセスされた場合のみ以下のルーティングを適用する
@@ -38,8 +49,10 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :customer do
-    root 'top#index'
+  constraints host: config[:customer][:host] do
+    namespace :customer, path: config[:customer][:path] do
+      root 'top#index'
+    end
   end
 
   # rootを明示しないとデフォルトのindex.htmlが表示されてしまう
