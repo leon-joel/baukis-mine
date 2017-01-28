@@ -34,4 +34,12 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # baukisという設定項目を追加。中身はhash。
+  config.baukis = {
+      staff: { host: 'baukis.example.com', path: '' },
+      admin: { host: 'baukis.example.com', path: 'admin' },
+      customer: { host: 'example.com', path: 'mypage' },
+  }
+
 end

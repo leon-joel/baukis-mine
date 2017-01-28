@@ -2,33 +2,40 @@ Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
-  # path を '' にしているので、url pathが /staff/login ではなく /login になる ※controllerとルーティング名は変わらない
-  namespace :staff, path: '' do
-    # Staff::TopController#index
-    root 'top#index'
+  config = Rails.application.config.baukis
 
-    get 'login' => 'sessions#new', as: :login
+  # ホスト名による制約 ※このホスト名でアクセスされた場合のみ以下のルーティングを適用する
+  constraints host: config[:staff][:host]  do
+    # ※config/environment/xxx.rbで設定したpathを適用する
+    namespace :staff, path: config[:staff][:path] do
+      # Staff::TopController#index
+      root 'top#index'
 
-    # 単数リソースで書き換え
-    # post 'session' => 'sessions#create', as: :session
-    # delete 'session' => 'sessions#destroy'
-    resource 'session', only: [ :create, :destroy ]
+      get 'login' => 'sessions#new', as: :login
 
-    # 単数リソースである点に注意 ※controllerは staff/accounts と複数形になる
-    resource :account, except: [ :new, :create, :destroy ]
+      # 単数リソースで書き換え
+      # post 'session' => 'sessions#create', as: :session
+      # delete 'session' => 'sessions#destroy'
+      resource 'session', only: [ :create, :destroy ]
+
+      # 単数リソースである点に注意 ※controllerは staff/accounts と複数形になる
+      resource :account, except: [ :new, :create, :destroy ]
+    end
   end
 
-  namespace :admin do
-    root 'top#index'
+  constraints host: config[:admin][:host]  do
+    namespace :admin, path: config[:admin][:path] do
+      root 'top#index'
 
-    get 'login' => 'sessions#new', as: :login
+      get 'login' => 'sessions#new', as: :login
 
-    # 単数リソースで書き換え
-    # post 'session' => 'sessions#create', as: :session
-    # delete 'session' => 'sessions#destroy'
-    resource 'session', only: [ :create, :destroy ]
+      # 単数リソースで書き換え
+      # post 'session' => 'sessions#create', as: :session
+      # delete 'session' => 'sessions#destroy'
+      resource 'session', only: [ :create, :destroy ]
 
-    resources :staff_members
+      resources :staff_members
+    end
   end
 
   namespace :customer do

@@ -87,4 +87,12 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # baukisという設定項目を追加。中身はhash。
+  config.baukis = {
+      staff: { host: 'baukis.example.com', path: '' },
+      admin: { host: 'baukis.example.com', path: 'admin' },
+      customer: { host: 'example.com', path: 'mypage' },
+  }
+
 end
