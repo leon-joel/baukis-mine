@@ -19,7 +19,9 @@ header {
   padding: $moderate;
   background-color: $dark_cyan;
   color: $very_light_gray;
-  span.logo-mark {
+  a.logo-mark {
+    float: none;  // floatを解除 ※↓でfloat:rightに設定されているので
+    text-decoration: none;  // 下線を表示しない
     font-weight: bold;
   }
   a {
