@@ -1,0 +1,42 @@
+@import 'colors';
+@import 'dimensions';
+
+div.table-wrapper {
+  width: 90%;       /* 左右に隙間を空ける */
+  margin: 0 auto;   /* 上下,左右: autoにより左右均等に配置 */
+
+  // 新規登録リンク
+  div.links {
+    text-align: right;
+    padding: $moderate;
+  }
+
+  table {
+    margin: $moderate auto 0;   // 上,左右,下
+    border: solid $moderate $very_dark_magenta;
+
+    //border-collapse: collapse;  // 枠線なし
+    //border-spacing: 5px;        // 枠線幅
+
+    tr {
+      th {
+        background: $dark_gray;
+        color: $very_light_gray;
+      }
+
+      th, td { padding: $narrow;}
+
+      td.email, td.date { font-family: monospace;}
+      td.boolean { text-align: center;}
+      td.actions {
+        text-align: center;
+        color: $dark_gray;
+      }
+    }
+  }
+  table.listing {
+    width: 100%;    // 外側要素（table-wrapping）一杯まで広げる
+    tr:nth-child(even) { background-color: $very_light_gray }
+    tr:nth-child(odd) { background-color: $light_gray }
+  }
+}
