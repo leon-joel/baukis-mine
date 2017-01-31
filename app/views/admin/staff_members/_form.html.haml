@@ -6,6 +6,7 @@
   = f.label :email, 'メールアドレス', class: 'required'
   = f.email_field :email, size: 32, required: true
 
+-# [新規の場合のみ] パスワード入力ボックスを表示
 - if f.object.new_record?
   %div
     = f.label :password, 'パスワード', class: 'required'
