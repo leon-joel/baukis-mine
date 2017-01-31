@@ -46,6 +46,11 @@ gem 'rails-i18n', '~> 4.0.1'
 
 gem 'haml-rails'
 
+group :development do
+  gem 'ruby-debug-ide'
+  gem 'debase'
+end
+
 group :test do
   # vagrant@vagrant-ubuntu-trusty-64:/vagrant$ RAILS_ENV=test rake db:create
   # rake aborted!
