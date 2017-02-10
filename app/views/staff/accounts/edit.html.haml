@@ -1,0 +1,12 @@
+- @title = 'アカウント情報編集'
+
+%h1
+  = @title
+
+#generic-form
+  = form_for @staff_member, url: :staff_account do |f|
+    -# formの中身は _form で定義
+    = render 'form', f: f
+    .buttons
+      = f.submit '更新'
+      = link_to 'キャンセル', :staff_account

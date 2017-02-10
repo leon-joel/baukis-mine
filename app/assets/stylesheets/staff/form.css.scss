@@ -1,0 +1,48 @@
+@import "colors";
+@import "dimensions";
+
+div#wrapper {
+  div#container {
+    div#generic-form {
+      width: 480px;
+      margin: $very_wide auto;
+      padding: $very_wide;
+
+      border: solid 4px $dark_cyan;
+      border-radius: $wide;
+
+      background-color: $very_light_gray;
+
+      form {
+        div {
+          padding: $wide;     // padding好きだな… marginならmarginの相殺を生かしてスッキリレイアウトできるような気がするけど、逆に難しくなるのかな。
+          label {
+            display: block;   // labelをblockにすることでinputと縦に並べる
+            padding: $moderate 0;
+          }
+          label.required:after {
+            content: '*';
+            color: red;
+            padding-left: $narrow;
+          }
+          input[type='checkbox']+label { display: inline-block;}  // checkboxの隣のlabel
+          input[type='radio']+label { display: inline-block;}     // radioの隣のlabel
+        }
+
+        div.notes {
+          text-align: right;
+          font-size: $small;
+          span.mark { color: red;}
+        }
+
+        div.buttons {
+          text-align: center;   // 登録/キャンセルボタンがフォーム幅の中央に配置される
+          input[type='submit'] {
+            padding: $wide $very_wide;  // 上下,左右
+          }
+        }
+      }
+
+    }
+  }
+}
