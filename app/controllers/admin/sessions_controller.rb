@@ -1,4 +1,7 @@
 class Admin::SessionsController < Admin::Base
+  # ※親クラスで指定されている :authorize before_action はこのクラスでは不要なのでスキップする
+  skip_before_action :authorize
+
   def new
     if current_administrator
       redirect_to :admin_root

@@ -1,4 +1,7 @@
 class Staff::SessionsController < Staff::Base
+  # ※親クラスで指定されている :authorize before_action はこのクラスでは不要なのでスキップする
+  skip_before_action :authorize
+
   def new
     if current_staff_member
       # ログイン済み
