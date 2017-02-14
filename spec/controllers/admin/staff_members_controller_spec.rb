@@ -1,9 +1,19 @@
 # require 'rspec'         # for non-Rails
 require 'rails_helper'  # for Rails
 
+describe Admin::StaffMembersController, 'ログイン前' do
+  it_behaves_like 'a protected admin controller'
+end
+
 describe Admin::StaffMembersController do
   # attributes_for: FactoryGirlsのメソッド。引数のfactoryを元にhashを生成してくれる
   let(:params_hash) { attributes_for(:staff_member)}
+  let(:administrator) { create(:administrator)}
+
+  before do
+    # adminとしてログインした状態にしてからテストする
+    session[:administrator_id] = administrator.id
+  end
 
   example 'attribute_forの確認' do
     expect(params_hash).not_to be_nil
