@@ -1,5 +1,6 @@
 class Staff::Base < ApplicationController
   before_action :authorize
+  before_action :check_account
 
   private
   # 現在ログインしているStaffMemberを返す
@@ -23,6 +24,15 @@ class Staff::Base < ApplicationController
       # ★before_action内で render, redirect_to したら、アクション本体（後続のactionも？）は実行されない
       #   もしくは、[Rails4の場合]return false しても同様にアクション本体（後続のactionも？）は実行されない。
       #   ※[Rails5の場合] throw(:abort) する。
+    end
+  end
+
+  def check_account
+    if current_staff_member && !current_staff_member.active?
+      # ログイン済み && 非active（＝無効）アカウント の場合 ⇒ 強制ログアウト
+      session.delete(:staff_member_id)
+      flash.alert = 'アカウントが無効になりました。'
+      redirect_to :staff_root
     end
   end
 
