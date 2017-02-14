@@ -29,6 +29,7 @@ class Staff::SessionsController < Staff::Base
       else
         # 認証OK
         session[:staff_member_id] = staff_member.id
+        session[:last_access_time] = Time.current
         flash.notice = 'ログインしました。'
         redirect_to :staff_root
       end

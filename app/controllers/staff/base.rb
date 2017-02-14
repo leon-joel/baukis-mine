@@ -1,6 +1,7 @@
 class Staff::Base < ApplicationController
   before_action :authorize
   before_action :check_account
+  before_action :check_timeout
 
   private
   # 現在ログインしているStaffMemberを返す
@@ -36,5 +37,21 @@ class Staff::Base < ApplicationController
     end
   end
 
+  # セッションタイムアウト時間 ※無操作時間がこれより長いと強制ログアウトする
+  TIMEOUT = 60.minutes
+
+  def check_timeout
+    if current_staff_member
+      if TIMEOUT.ago <= session[:last_access_time]    # ※session[:last_access_time]がnilになることはないのだろうか??? ※nilの場合⇒ ArgumentError:comparison of ActiveSupport::TimeWithZone with nil failed
+        # タイムアウトに達していない ⇒ 最終アクセス時刻を更新
+        session[:last_access_time] = Time.current
+      else
+        # タイムアウトに達している ⇒ 強制ログアウト
+        session.delete(:staff_member_id)
+        flash.alert = 'セッションがタイムアウトしました。'
+        redirect_to :staff_login
+      end
+    end
+  end
 
 end
