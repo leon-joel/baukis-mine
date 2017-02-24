@@ -1,0 +1,15 @@
+sudo su - postgres
+
+/etc/postgresql/9.3/main
+
+vi postgres.conf
+  listen_addresses '*'
+vi pg_hba.conf
+  10.0.2.2  追加  ※これが必要な理由が分からない。似たような構成のrails-dev-boxのほうは無くてもいけてるのに。
+
+exit
+sudo service postgresql restart
+
+psql
+\password
+  vagrant のパスワードを変更
