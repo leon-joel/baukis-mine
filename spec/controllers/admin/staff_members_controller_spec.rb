@@ -13,6 +13,7 @@ describe Admin::StaffMembersController do
   before do
     # adminとしてログインした状態にしてからテストする
     session[:administrator_id] = administrator.id
+    session[:last_access_time] = 1.second.ago
   end
 
   example 'attribute_forの確認' do
