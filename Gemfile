@@ -43,6 +43,7 @@ gem 'therubyracer', platform: :ruby
 gem 'bcrypt', '~> 3.1.7'
 gem 'nokogiri', '~> 1.6.1'
 gem 'rails-i18n', '~> 4.0.1'
+gem 'foreigner', '~> 1.6.1'
 
 gem 'haml-rails'
 
