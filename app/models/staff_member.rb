@@ -1,4 +1,6 @@
 class StaffMember < ActiveRecord::Base
+  has_many :events, class_name: 'StaffEvent', dependent: :destroy   # dependentオプションは他にも :delete_all, :nullify なども。
+
   before_validation do
     self.email_for_index = email.downcase if email
   end
