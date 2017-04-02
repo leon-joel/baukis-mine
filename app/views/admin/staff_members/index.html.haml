@@ -35,6 +35,8 @@
         %td.actions
           = link_to '編集', [ :edit, :admin, m ]
           |
+          = link_to 'Events', [ :admin, m, :staff_events ]    # admin_staff_member_staff_events_path(m) と同じ
+          |
           = link_to '削除', [ :admin, m ], method: :delete,
             data: { confirm: '本当に削除しますか？' }
 

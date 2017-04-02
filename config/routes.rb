@@ -45,7 +45,12 @@ Rails.application.routes.draw do
       # delete 'session' => 'sessions#destroy'
       resource 'session', only: [ :create, :destroy ]
 
-      resources :staff_members
+      resources :staff_members do
+        # StaffMemberごとの記録を表示
+        resources :staff_events, only: [ :index ]
+      end
+      # 全StaffMemberの記録を表示
+      resources :staff_events, only: [ :index ]
     end
   end
 
