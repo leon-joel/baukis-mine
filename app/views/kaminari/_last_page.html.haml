@@ -6,4 +6,6 @@
 -#    per_page:      number of items to fetch per page
 -#    remote:        data-remote
 %span.last
-  = link_to_unless current_page.last?, t('views.pagination.last').html_safe, url, :remote => remote
+  = link_to_unless(current_page.last?, t("views.pagination.last").html_safe, url) do |name|
+    -# 条件がtrueの場合はこれ↓が表示され、falseの場合は urlへのlinkが表示される。
+    = content_tag(:span, name, class: 'disabled')
