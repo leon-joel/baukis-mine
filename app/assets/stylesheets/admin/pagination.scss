@@ -1,0 +1,35 @@
+// SCSSパーシャルの読み込み
+@import 'colors';
+@import 'dimensions';
+
+nav.pagination {
+  // 上下に適切なmarginを
+  margin: $moderate 0;
+  // 上下のラインとの隙間を空ける
+  padding: $moderate 0;
+
+  display: inline-block;
+
+  // 上下にラインを描画
+  border-top: solid $very_light_gray 1px;
+  border-bottom: solid $very_light_gray 1px;
+
+  // リンク
+  span.page, span.first, span.prev, span.next, span.last {
+    display: inline-block;
+    // ボタンっぽく表示
+    background-color: $light_gray;
+    padding: $narrow $moderate;
+    a { text-decoration: none; }
+  }
+  // 現在ページは反転表示
+  span.current {
+    background-color: $dark_gray;
+    color: $light_gray;
+  }
+  // 使用できないボタンはうす色表示
+  span.disabled { color: $gray; }
+  // …は決して押せないのでボタンっぽくしない
+  span.gap { background-color: transparent; }
+}
+
